@@ -1,8 +1,9 @@
 # 🌍 SurveyGIS — מערכת GIS פנים-משרדית לניהול מדידות
-
+**מגישים: בר שפילמן ונעמה הקשר**
 <div align="center">
 
-**מערכת מידע גאוגרפי לניהול, שליפה והצגת מדידות במשרד מדידות**
+**מערכת מידע גאוגרפי מבוססת Google Earth** 
+**לניהול, שליפה והצגת מדידות במשרד מדידות**
 
 `v1.0.0` · אפריל 2026
 
@@ -19,7 +20,7 @@
 5. [קלט — סוגי קבצים ומקורות מידע](#-קלט--סוגי-קבצים-ומקורות-מידע)
 6. [פלט — תוצרים ודוחות](#-פלט--תוצרים-ודוחות)
 7. [בסיס נתונים](#-בסיס-נתונים)
-8. [מנוע מפות (Map Engine)](#-מנוע-מפות-map-engine)
+8. [מנוע מפות — Google Earth](#-מנוע-מפות--google-earth)
 9. [API — ממשק תכנות](#-api--ממשק-תכנות)
 10. [טכנולוגיות](#-טכנולוגיות)
 11. [התקנה והרצה](#-התקנה-והרצה)
@@ -31,12 +32,23 @@
 
 ## 🔭 סקירה כללית
 
-**SurveyGIS** היא מערכת GIS פנים-משרדית המיועדת למשרד מדידות. המערכת מאפשרת:
+**SurveyGIS** היא מערכת GIS פנים-משרדית המיועדת למשרד מדידות, המבוססת על **Google Earth** כממשק המפה המרכזי.
 
-- **העלאת קבצי מדידה** (DWG, DXF, SHP, CSV, LAS ועוד) וחיבורם למיקום גאוגרפי על המפה.
+### 🌐 למה Google Earth?
+
+| סיבה | הסבר |
+|-------|-------|
+| 🔒 **אבטחת מידע** | Google Earth מציע תשתית אבטחה מתקדמת ברמה ארגונית (Google Workspace), כולל הצפנה, ניהול הרשאות, ואימות דו-שלבי — קריטי עבור מידע מדידות רגיש |
+| 📊 **אינטגרציה עם Google Sheets** | במשרד כבר קיים **יומן עבודות פעיל המתומשך ל-Google Sheets**. שימוש ב-Google Earth מאפשר אינטגרציה טבעית וחלקה עם יומן העבודות הקיים, ללא צורך בהעברת נתונים או מערכות מקבילות |
+| 🔗 **אקוסיסטם אחוד** | עבודה בתוך אקוסיסטם Google (Earth + Sheets + Drive) מבטיחה תאימות מלאה, ניהול הרשאות מרוכז, ושיתוף פעולה חלק בין כל רכיבי המערכת |
+
+המערכת מאפשרת:
+
+- **העלאת קבצי מדידה** (DWG, DXF, SHP, CSV, KML/KMZ ועוד) וחיבורם למיקום גאוגרפי על Google Earth.
 - **חיפוש מרחבי** — לחיצה על מיקום במפה ושליפת כל המדידות שנעשו באזור.
 - **סינון וחיפוש** — סינון מדידות לפי **טווח תאריכים**, **סוג מדידה**, אזור גאוגרפי, סטטוס ועוד.
 - **ניהול פרויקטים** — מעקב אחרי סטטוס פרויקטים, לקוחות, ומודדים אחראיים.
+- **סנכרון עם יומן עבודות** — חיבור ישיר ל-Google Sheets לעדכון אוטומטי של יומן העבודות המשרדי.
 - **גישה מהשטח** — מודדים בשטח יכולים **לצפות** במדידות קיימות ולהוריד חומרים רלוונטיים (ללא העלאת קבצים).
 - **הפקת דוחות** — ייצוא מפות, סיכומי פרויקטים וניתוחים סטטיסטיים.
 
@@ -48,7 +60,7 @@
 
 | כאב | תיאור |
 |------|--------|
-| 🔍 קושי בשליפה | קבצי מדידה מפוזרים בתיקיות במחשבים שונים, קשה למצוא מדידה ישנה |
+| 🔍 קושי בשליפה | קבצי מדידה מפוזרים בתיקיות שונות במחשב למי מספרי עבודה מרובים, קשה למצוא מדידה ישנה |
 | 🗺️ חוסר תמונה מרחבית | אין מפה אחודה שמראה איפה בוצעו מדידות בעבר |
 | 📂 כפילויות | מדידות חוזרות באותו אזור בלי לדעת שכבר קיים מידע |
 | 📊 חוסר מעקב | קשה לעקוב אחרי סטטוס פרויקטים, לקוחות, וחשבוניות |
@@ -56,7 +68,7 @@
 
 ### הפתרון
 
-מערכת GIS אחודה שמרכזת את **כל קבצי המדידה** על **מפה אינטראקטיבית**, עם **חיפוש מרחבי**, **ניהול פרויקטים**, ו**גישה ניידת** מהשטח.
+מערכת GIS אחודה מבוססת **Google Earth** שמרכזת את **כל קבצי המדידה** על **מפה אינטראקטיבית**, עם **חיפוש מרחבי**, **ניהול פרויקטים**, **סנכרון עם יומן עבודות ב-Google Sheets**, ו**גישה ניידת** מהשטח. הבחירה ב-Google Earth נובעת מדרישות **אבטחת מידע** ומהאינטגרציה הטבעית עם **Google Sheets** בו מנוהל יומן העבודות המשרדי.
 
 ---
 
@@ -102,7 +114,8 @@
 │                    לקוח (Client)                         │
 │  ┌─────────────────┐     ┌─────────────────────────┐     │
 │  │  אפליקציית Web  │     │  אפליקציה ניידת (PWA)   │     │
-│  │  React + Leaflet│     │  React + Leaflet        │     │
+│  │  React + Google │     │  React + Google Earth   │     │
+│  │  Earth API      │     │                         │     │
 │  └────────┬────────┘     └───────────┬─────────────┘     │
 └───────────┼──────────────────────────┼───────────────────┘
             │          HTTPS           │
@@ -110,18 +123,18 @@
 ┌──────────────────────────────────────────────────────────┐
 │                    שרת (Server)                          │
 │  ┌─────────────────────────────────────────────────┐     │
-│  │              Node.js / Express                   │     │
+│  │              Python / Flask                      │     │
 │  │         REST API + WebSocket                     │     │
-│  └─────────┬──────────────────┬────────────────────┘     │
-│            │                  │                           │
-│  ┌─────────▼────────┐  ┌─────▼──────────────────┐       │
-│  │  File Processor   │  │  Geo Service            │       │
-│  │  (DXF/SHP/CSV     │  │  (PROJ4, Turf.js)       │       │
-│  │   Parser)         │  │  המרת קואורדינטות       │       │
-│  └─────────┬────────┘  └─────┬──────────────────┘       │
-└────────────┼─────────────────┼───────────────────────────┘
-             │                 │
-             ▼                 ▼
+│  └────┬────────────────┬───────────────┬───────────┘     │
+│       │                │               │                  │
+│  ┌────▼───────────┐ ┌──▼────────────┐ ┌▼───────────────┐ │
+│  │ File Processor │ │ Geo Service   │ │ Google Sheets  │ │
+│  │ (DXF/SHP/CSV   │ │ (pyproj,      │ │ Sync Service   │ │
+│  │  Parser)       │ │  Shapely)     │ │ (יומן עבודות)  │ │
+│  └────────┬───────┘ └──────┬────────┘ └───────┬────────┘ │
+└───────────┼────────────────┼──────────────────┼──────────┘
+            │                │                  │
+            ▼                ▼                  ▼
 ┌──────────────────────────────────────────────────────────┐
 │                  בסיס נתונים (Database)                   │
 │  ┌─────────────────────────────────────────────────┐     │
@@ -131,10 +144,10 @@
 │  │  │          │ │          │ │ (Geometries) │    │     │
 │  │  └──────────┘ └──────────┘ └──────────────┘    │     │
 │  └─────────────────────────────────────────────────┘     │
-│  ┌─────────────────────────────────────────────────┐     │
-│  │           אחסון קבצים (File Storage)              │     │
-│  │           MinIO / Local Disk                     │     │
-│  └─────────────────────────────────────────────────┘     │
+│  ┌─────────────────┐  ┌────────────────────────────┐     │
+│  │  אחסון קבצים    │  │  Google Sheets (יומן עבודות)│     │
+│  │  MinIO / Local  │  │  ← סנכרון דו-כיווני        │     │
+│  └─────────────────┘  └────────────────────────────┘     │
 └──────────────────────────────────────────────────────────┘
 ```
 
@@ -152,7 +165,7 @@
 | CSV / TXT | `.csv`, `.txt` | טבלאות קואורדינטות (X, Y, Z) | פרסור ויצירת נקודות/פוליגונים |
 | GeoJSON | `.geojson` | פורמט גאוגרפי מבוסס JSON | ייבוא ישיר |
 | LAS / LAZ | `.las`, `.laz` | ענני נקודות (Point Clouds) מסריקת לייזר | עיבוד וייצוג על המפה |
-| KML / KMZ | `.kml`, `.kmz` | קבצי Google Earth | המרה ל-GeoJSON |
+| KML / KMZ | `.kml`, `.kmz` | קבצי Google Earth | ייבוא ישיר ל-Google Earth |
 | GPX | `.gpx` | מסלולי GPS | ייבוא נקודות ומסלולים |
 | תמונות | `.jpg`, `.tif` | תמונות אורתופוטו / אווריות | הצגה כשכבת רקע |
 | PDF | `.pdf` | תוכניות סרוקות | אחסון ושיוך לפרויקט |
@@ -210,7 +223,7 @@
 | רשימת מדידות באזור | PDF / Excel | כל המדידות בטווח גאוגרפי מסוים |
 | מפת סטטוס | PNG / PDF | מפה צבעונית לפי סטטוס פרויקטים |
 | דוח מודד | PDF | ריכוז עבודות לפי מודד ותקופה |
-| ייצוא נתונים | GeoJSON / SHP / DXF / CSV | ייצוא גאומטריות ונתונים מהמערכת |
+| ייצוא נתונים | GeoJSON / SHP / DXF / CSV / KMZ | ייצוא גאומטריות ונתונים מהמערכת |
 | דוח לקוח | PDF | ריכוז פרויקטים ללקוח מסוים |
 | תעודת מדידה | PDF | תעודת סיום מדידה (לפי תבנית) |
 
@@ -445,29 +458,33 @@ INSERT INTO survey_types (name, description, color) VALUES
 
 ---
 
-## 🗺️ מנוע מפות (Map Engine)
+## 🗺️ מנוע מפות — Google Earth
+
+> 🔒 **הערה:** הבחירה ב-Google Earth כמנוע המפות נובעת מדרישות **אבטחת מידע** (תשתית Google Workspace עם הצפנה והרשאות מתקדמות) ומהאינטגרציה הטבעית עם **יומן העבודות הקיים ב-Google Sheets**.
 
 ### שכבות מפה
 
 | שכבה | מקור | תיאור |
 |-------|-------|--------|
-| מפת רקע — לווין | Esri / Google / Mapbox | תצלום אוויר עדכני |
-| מפת רקע — רחובות | OpenStreetMap | מפת רחובות ומבנים |
-| מפת רקע — טופו | MAPI | מפה טופוגרפית של ישראל |
-| גושים וחלקות | GovMap API | שכבת קדסטר רשמית |
-| מדידות — נקודות | PostGIS | נקודות מדידה מ-DB |
-| מדידות — פוליגונים | PostGIS | תחומי מדידה מ-DB |
-| מדידות — קווים | PostGIS | קווים (גבולות, חתכים) מ-DB |
-| תב"ע | GovMap API | שכבת תב"ע |
+| מפת רקע — לווין | Google Earth | תצלום לווין / אוויר עדכני (שכבת ברירת מחדל) |
+| מפת רקע — 3D Terrain | Google Earth | מודל תלת-ממדי של פני השטח |
+| מפת רקע — רחובות | Google Maps / Earth | מפת רחובות ומבנים |
+| גושים וחלקות | GovMap API (KML Overlay) | שכבת קדסטר רשמית |
+| מדידות — נקודות | PostGIS → KML | נקודות מדידה מ-DB |
+| מדידות — פוליגונים | PostGIS → KML | תחומי מדידה מ-DB |
+| מדידות — קווים | PostGIS → KML | קווים (גבולות, חתכים) מ-DB |
+| תב"ע | GovMap API (KML Overlay) | שכבת תב"ע |
+| יומן עבודות | Google Sheets (סנכרון) | שכבת עבודות פעילות מתוך יומן העבודות |
 
 ### כלי מפה
 
 - 🔍 **חיפוש מרחבי** — ציור מלבן/עיגול/פוליגון ← שליפת כל המדידות בתוך האזור
 - 📍 **Geocoding** — חיפוש לפי כתובת, גוש/חלקה, או קואורדינטות
-- 📏 **מדידת מרחק** — מדידת מרחק בין שתי נקודות
+- 📏 **מדידת מרחק** — מדידת מרחק בין שתי נקודות (Google Earth Ruler)
 - 📐 **מדידת שטח** — חישוב שטח פוליגון
 - 🖨️ **הדפסת מפה** — ייצוא תצוגת המפה הנוכחית ל-PDF/PNG
 - 🔄 **רפרוייקציה** — המרה בין מערכות קואורדינטות (ITM ↔ WGS84 ↔ ICS)
+- 🌐 **תצוגת 3D** — ניצול יכולות התלת-ממד של Google Earth להצגת מדידות על פני השטח
 
 ### מערכות קואורדינטות
 
@@ -527,7 +544,7 @@ GET     /api/files/:id/preview           # תצוגה מקדימה (GeoJSON)
 GET     /api/features                    # כל הישויות (עם פילטר bbox)
 GET     /api/features/:id                # ישות בודדת
 POST    /api/features                    # יצירת ישות ידנית
-GET     /api/features/export?format=     # ייצוא (geojson/shp/dxf/csv)
+GET     /api/features/export?format=     # ייצוא (geojson/shp/dxf/csv/kml)
 ```
 
 #### משתמשים ולקוחות
@@ -565,7 +582,7 @@ survey:feature:added     # ישות גאוגרפית נוספה
 |-----------|--------|
 | **React 18+** | ספריית UI |
 | **TypeScript** | Type Safety |
-| **Leaflet** + **React-Leaflet** | מנוע מפות |
+| **Google Earth API** / **Google Maps JavaScript API** | מנוע מפות (ממשק Google Earth) |
 | **Turf.js** | חישובים גאומטריים בצד הלקוח |
 | **Proj4js** | המרת מערכות קואורדינטות |
 | **React Query (TanStack)** | ניהול state של שרת |
@@ -579,20 +596,24 @@ survey:feature:added     # ישות גאוגרפית נוספה
 
 | טכנולוגיה | תפקיד |
 |-----------|--------|
-| **Node.js 20+** | סביבת הרצה |
-| **Express.js** | HTTP framework |
-| **TypeScript** | Type Safety |
-| **Prisma** | ORM לבסיס נתונים |
-| **Multer** | ניהול העלאת קבצים |
-| **dxf-parser** | פרסור קבצי DXF |
+| **Python 3.12+** | סביבת הרצה |
+| **Flask 3.x** | HTTP framework |
+| **SQLAlchemy + GeoAlchemy2** | ORM לבסיס נתונים (כולל תמיכת PostGIS) |
+| **Alembic** | מיגרציות בסיס נתונים |
+| **Marshmallow / Pydantic** | Validation וסריאליזציה |
+| **ezdxf** | פרסור קבצי DXF |
 | **ODA File Converter** / **libredwg** | המרת קבצי DWG ל-DXF לצורך פרסור |
-| **shapefile** (mapshaper) | פרסור קבצי Shapefile |
-| **csv-parse** | פרסור קבצי CSV |
-| **Sharp** | עיבוד תמונות |
-| **PDFKit** | יצירת דוחות PDF |
-| **Socket.io** | WebSocket לעדכונים בזמן אמת |
-| **Bull / BullMQ** | תורי עבודה לעיבוד קבצים |
-| **Winston** | לוגים |
+| **Fiona + pyshp** | פרסור קבצי Shapefile |
+| **Pandas** | פרסור קבצי CSV ועיבוד נתונים |
+| **Pillow** | עיבוד תמונות |
+| **ReportLab / WeasyPrint** | יצירת דוחות PDF |
+| **Flask-SocketIO** | WebSocket לעדכונים בזמן אמת |
+| **gspread + googleapis** | סנכרון עם יומן עבודות ב-Google Sheets |
+| **Google Earth Engine API** | עיבוד נתונים גאו-מרחביים |
+| **Celery** | תורי עבודה לעיבוד קבצים |
+| **Loguru** | לוגים |
+| **Shapely + pyproj** | חישובים גאומטריים והמרת קואורדינטות |
+| **GeoPandas** | עיבוד נתונים גאו-מרחביים |
 
 ### בסיס נתונים ותשתית
 
@@ -602,6 +623,7 @@ survey:feature:added     # ישות גאוגרפית נוספה
 | **PostGIS 3.4** | הרחבת GIS ל-PostgreSQL |
 | **Redis** | Cache + תורי עבודה |
 | **MinIO** (או S3) | אחסון קבצים |
+| **Google Workspace** | אבטחת מידע, Google Sheets, Google Earth, Drive |
 | **Docker** | קונטיינריזציה |
 | **Nginx** | Reverse Proxy |
 
@@ -611,7 +633,7 @@ survey:feature:added     # ישות גאוגרפית נוספה
 
 ### דרישות מקדימות
 
-- **Node.js** >= 20.x
+- **Python** >= 3.12
 - **PostgreSQL** >= 16 עם **PostGIS** >= 3.4
 - **Redis** >= 7
 - **Docker** + **Docker Compose** (מומלץ)
@@ -632,24 +654,33 @@ docker compose up -d
 
 # המערכת תהיה זמינה ב:
 # Frontend:  http://localhost:3000
-# Backend:   http://localhost:4000
+# Backend:   http://localhost:5000
 # DB Admin:  http://localhost:5050 (pgAdmin)
 ```
 
 ### הרצה מקומית (Development)
 
 ```bash
-# התקנת תלויות
-cd server && npm install
+# יצירת סביבה וירטואלית והתקנת תלויות (שרת)
+cd server
+python -m venv venv
+venv\Scripts\activate      # Windows
+# source venv/bin/activate  # Linux/Mac
+pip install -r requirements.txt
+
+# התקנת תלויות לקוח
 cd ../client && npm install
 
 # הגדרת בסיס נתונים
 cd ../server
-npx prisma migrate dev
-npx prisma db seed        # נתוני דוגמה
+alembic upgrade head       # הרצת מיגרציות
+python seed.py             # נתוני דוגמה
 
 # הרצת שרת
-npm run dev               # http://localhost:4000
+python app.py              # http://localhost:5000
+
+# הרצת Celery Worker (בטרמינל נפרד)
+celery -A app.celery worker --loglevel=info
 
 # הרצת לקוח (בטרמינל נפרד)
 cd ../client
@@ -677,13 +708,18 @@ STORAGE_PATH=./uploads
 # MINIO_ACCESS_KEY=minioadmin
 # MINIO_SECRET_KEY=minioadmin
 
+# Google Services
+GOOGLE_EARTH_API_KEY=your-google-earth-api-key
+GOOGLE_SHEETS_SPREADSHEET_ID=your-spreadsheet-id
+GOOGLE_SERVICE_ACCOUNT_KEY=./config/google-service-account.json
+
 # Map Services
 GOVMAP_API_KEY=your-govmap-api-key
-MAPBOX_TOKEN=your-mapbox-token
 
 # Server
-PORT=4000
-NODE_ENV=development
+PORT=5000
+FLASK_ENV=development
+FLASK_DEBUG=1
 ```
 
 ---
@@ -707,7 +743,7 @@ NODE_ENV=development
          │
          ▼
   ┌──────────────┐
-  │  Processing   │  חילוץ גאומטריות ← תור עבודה (BullMQ)
+  │  Processing   │  חילוץ גאומטריות ← תור עבודה (Celery)
   │  Queue        │
   └──────┬───────┘
          │
@@ -756,7 +792,7 @@ NODE_ENV=development
   ┌──────────────────┐
   │  Results          │  תוצאות עם:
   │                   │  - רשימת פרויקטים
-  │                   │  - GeoJSON להצגה על המפה
+  │                   │  - KML להצגה על Google Earth
   │                   │  - פרטי לקוח ומודד
   └──────────────────┘
 ```
@@ -788,6 +824,7 @@ NODE_ENV=development
 ### אימות (Authentication)
 
 - **JWT** — טוקן מבוסס JSON Web Token
+- **Google Workspace** — אימות דרך חשבון Google ארגוני
 - **Refresh Token** — טוקן ארוך טווח לרענון
 - **bcrypt** — הצפנת סיסמאות
 
@@ -816,37 +853,40 @@ NODE_ENV=development
 ### שלב 1 — MVP (חודשים 1-2) 🎯
 
 - [x] תכנון ארכיטקטורה ו-DB
-- [ ] הקמת שרת Express + Prisma
+- [ ] הקמת שרת Flask + SQLAlchemy
 - [ ] הקמת בסיס נתונים PostgreSQL + PostGIS
-- [ ] מערכת אימות (Login / JWT)
+- [ ] מערכת אימות (Login / JWT + Google Workspace)
 - [ ] CRUD פרויקטים ולקוחות
 - [ ] העלאת קבצים בסיסית (DWG, DXF, CSV)
 - [ ] סינון לפי טווח תאריכים וסוג מדידה
-- [ ] מפה אינטראקטיבית עם Leaflet
-- [ ] הצגת פרויקטים על המפה
+- [ ] מפה אינטראקטיבית עם Google Earth API
+- [ ] הצגת פרויקטים על המפה (KML layers)
 - [ ] חיפוש מרחבי בסיסי (BBox)
+- [ ] אינטגרציה בסיסית עם Google Sheets (יומן עבודות — קריאה)
 
 ### שלב 2 — גרסה מלאה (חודשים 3-4) 🚀
 
 - [ ] פרסור אוטומטי DXF (שכבות + גאומטריות)
 - [ ] תמיכה ב-Shapefile, GeoJSON, KML
+- [ ] סנכרון דו-כיווני עם Google Sheets (יומן עבודות — קריאה וכתיבה)
 - [ ] חיפוש לפי גוש/חלקה
-- [ ] חיפוש לפי כתובת (Geocoding)
+- [ ] חיפוש לפי כתובת (Geocoding — Google Maps)
 - [ ] מערכת דוחות PDF
-- [ ] שכבת גושים וחלקות (GovMap)
+- [ ] שכבת גושים וחלקות (GovMap → KML Overlay)
 - [ ] PWA — גרסה ניידת
-- [ ] תור עבודה לעיבוד קבצים (BullMQ)
+- [ ] תור עבודה לעיבוד קבצים (Celery)
 - [ ] התראות WebSocket
 
 ### שלב 3 — התקדמות (חודשים 5-6) ⚡
 
 - [ ] תמיכה בענני נקודות (LAS/LAZ)
-- [ ] השוואת מדידות (overlay)
+- [ ] השוואת מדידות (overlay ב-Google Earth)
 - [ ] דוחות מתקדמים + סטטיסטיקות
 - [ ] אינטגרציה עם GovMap API
-- [ ] ייצוא ל-DXF / SHP
+- [ ] ייצוא ל-DXF / SHP / KMZ
 - [ ] ניהול גרסאות קבצים
 - [ ] חיפוש טקסט מלא (Full-Text Search)
+- [ ] שיתוף פרויקטים דרך Google Earth קישורי KML
 
 ### שלב 4 — אופטימיזציה (חודשים 7+) 🔧
 
@@ -856,6 +896,7 @@ NODE_ENV=development
 - [ ] API פתוח לאינטגרציה עם תוכנות מדידה
 - [ ] אפליקציה native (React Native)
 - [ ] Offline mode למודדים בשטח
+- [ ] Google Earth Engine — ניתוחים מרחביים מתקדמים
 
 ---
 
@@ -869,12 +910,12 @@ survey-gis/
 │   │   ├── assets/            # תמונות, אייקונים
 │   │   ├── components/        # רכיבי UI
 │   │   │   ├── common/        # כפתורים, טפסים, מודלים
-│   │   │   ├── map/           # רכיבי מפה
+│   │   │   ├── map/           # רכיבי מפה (Google Earth)
 │   │   │   ├── projects/      # רכיבי פרויקטים
 │   │   │   └── layout/        # Header, Sidebar, Footer
 │   │   ├── hooks/             # Custom React Hooks
 │   │   ├── pages/             # דפי האפליקציה
-│   │   ├── services/          # קריאות API
+│   │   ├── services/          # קריאות API + Google Sheets
 │   │   ├── store/             # State Management (Zustand)
 │   │   ├── types/             # TypeScript Types
 │   │   ├── utils/             # פונקציות עזר
@@ -884,28 +925,44 @@ survey-gis/
 │   ├── tsconfig.json
 │   └── vite.config.ts
 │
-├── server/                    # Backend (Node.js / Express)
-│   ├── src/
-│   │   ├── config/            # הגדרות
-│   │   ├── controllers/       # בקרים
-│   │   ├── middleware/        # Middleware (auth, validation)
-│   │   ├── models/            # מודלים (Prisma)
-│   │   ├── routes/            # ניתובים
-│   │   ├── services/          # לוגיקה עסקית
-│   │   │   ├── geo/           # שירותי GIS (parser, reproject)
-│   │   │   ├── files/         # ניהול קבצים
-│   │   │   ├── reports/       # הפקת דוחות
-│   │   │   └── search/        # חיפוש מרחבי
-│   │   ├── workers/           # תורי עבודה (BullMQ)
-│   │   ├── utils/             # פונקציות עזר
-│   │   └── app.ts
-│   ├── prisma/
-│   │   ├── schema.prisma      # סכמת DB
-│   │   ├── migrations/        # מיגרציות
-│   │   └── seed.ts            # נתוני דוגמה
-│   ├── uploads/               # אחסון קבצים מקומי
-│   ├── package.json
-│   └── tsconfig.json
+├── server/                    # Backend (Python / Flask)
+│   ├── app.py                 # נקודת כניסה ראשית
+│   ├── config.py              # הגדרות (כולל Google Service Account)
+│   ├── requirements.txt       # תלויות Python
+│   ├── models/                # מודלים (SQLAlchemy + GeoAlchemy2)
+│   │   ├── __init__.py
+│   │   ├── user.py
+│   │   ├── client.py
+│   │   ├── project.py
+│   │   ├── survey_file.py
+│   │   └── geo_feature.py
+│   ├── routes/                # ניתובים (Blueprints)
+│   │   ├── __init__.py
+│   │   ├── auth.py
+│   │   ├── projects.py
+│   │   ├── clients.py
+│   │   ├── files.py
+│   │   ├── features.py
+│   │   ├── search.py
+│   │   └── reports.py
+│   ├── services/              # לוגיקה עסקית
+│   │   ├── geo/               # שירותי GIS (parser, reproject)
+│   │   ├── files/             # ניהול קבצים
+│   │   ├── google/            # שירותי Google (Sheets, Earth)
+│   │   ├── reports/           # הפקת דוחות
+│   │   └── search/            # חיפוש מרחבי
+│   ├── middleware/            # Middleware (auth, validation)
+│   ├── tasks/                 # תורי עבודה (Celery)
+│   │   ├── __init__.py
+│   │   └── file_processing.py
+│   ├── schemas/               # Marshmallow / Pydantic schemas
+│   ├── utils/                 # פונקציות עזר
+│   ├── alembic/               # מיגרציות בסיס נתונים
+│   │   ├── versions/
+│   │   └── env.py
+│   ├── alembic.ini
+│   ├── seed.py                # נתוני דוגמה
+│   └── uploads/               # אחסון קבצים מקומי
 │
 ├── docker/
 │   ├── Dockerfile.client
@@ -919,9 +976,6 @@ survey-gis/
 ```
 
 ---
-
-## 📞 צרו קשר
-**משרד מדידות יגאל הקשר**
 
 
 ---
